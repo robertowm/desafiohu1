@@ -21,7 +21,7 @@ lazy val versions = new {
   val mockito = "1.9.5"
   val scalatest = "2.2.3"
   val specs2 = "2.3.12"
-  val elastic4s = "2.1.0"
+  val lucene = "5.5.0"
 }
 
 libraryDependencies ++= Seq(
@@ -47,4 +47,7 @@ libraryDependencies ++= Seq(
   "org.scalatest" %% "scalatest" % versions.scalatest % "test",
   "org.specs2" %% "specs2" % versions.specs2 % "test",
 
-  "com.sksamuel.elastic4s" %% "elastic4s-core" % versions.elastic4s)
+  "org.apache.lucene" % "lucene-core" % versions.lucene,
+  "org.apache.lucene" % "lucene-analyzers-common" % versions.lucene,
+  "org.apache.lucene" % "lucene-queryparser" % versions.lucene
+)
