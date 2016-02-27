@@ -1,6 +1,6 @@
 package com.hotelurbano.desafiohu1
 
-import com.hotelurbano.desafiohu1.controller.PingController
+import com.hotelurbano.desafiohu1.controller.{WidgetController, PingController}
 import com.twitter.finagle.http.{Response, Request}
 import com.twitter.finatra.http.HttpServer
 import com.twitter.finatra.http.filters.CommonFilters
@@ -22,6 +22,7 @@ class AppServer extends HttpServer {
       .filter[TraceIdMDCFilter[Request, Response]]
       .filter[CommonFilters]
       .add[PingController]
+      .add[WidgetController]
   }
 
 }

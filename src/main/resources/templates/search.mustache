@@ -1,0 +1,69 @@
+{{<layout.mustache}}
+{{$body}}
+<div class="container widget">
+    <div>HOTÉIS</div>
+    <div>+ 170.000 hotéis, pousadas e resorts no mundo todo.</div>
+    <form action="search" method="post">
+
+        <div class="row">
+            <div class="col-lg-4">
+                <label for="whereInput">Quer ficar onde?</label>
+            </div>
+            <div class="col-lg-8">
+                <label for="startInput">Quando? (Entrada e Saída)</label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-4">
+                <input type="text" id="whereInput" placeholder="cidade ou hotel" name="where"
+                       class="typeahead" autocomplete="off">
+            </div>
+            <div class="col-lg-4 ">
+                <div class="input-daterange">
+                    <input type="text" id="startInput" placeholder="entrada" name="start"/>
+                </div>
+            </div>
+            <div class="col-lg-4 ">
+                <div class="input-daterange">
+                    <input type="text" id="endInput" placeholder="saída" name="end" />
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-4">
+                <label for="noDateCheckbox">
+                    <input type="checkbox" id="noDateCheckbox" name="undef"> Ainda não defini as datas
+                </label>
+            </div>
+        </div>
+
+        <div class="center-block">
+            <input type="submit" class="btn-primary" value="Buscar">
+        </div>
+    </form>
+</div>
+{{/body}}
+{{$custom-scripts}}
+<script>
+    $('.widget .input-daterange').datepicker({
+        format: "dd/mm/yyyy",
+        maxViewMode: 0,
+        language: "pt-BR",
+        autoclose: true,
+        todayHighlight: true
+    });
+
+    $('.typeahead').typeahead({
+        source: function (query, callback) {
+            var result = [];
+            for (var i = 1; i <= 4; i++) {
+                result.push(query + i);
+            }
+            callback(result);
+        }
+    });
+</script>
+{{/custom-scripts}}
+{{/layout.mustache}}
