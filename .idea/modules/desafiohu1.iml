@@ -138,5 +138,7 @@
     <orderEntry type="library" name="SBT: org.apache.lucene:lucene-queries:5.5.0:jar" level="project" />
     <orderEntry type="library" name="SBT: org.apache.lucene:lucene-queryparser:5.5.0:jar" level="project" />
     <orderEntry type="library" name="SBT: org.apache.lucene:lucene-sandbox:5.5.0:jar" level="project" />
+    <orderEntry type="library" name="SBT: com.ibm.icu:icu4j:54.1:jar" level="project" />
+    <orderEntry type="library" name="SBT: org.apache.lucene:lucene-analyzers-icu:5.5.0:jar" level="project" />
   </component>
 </module>
