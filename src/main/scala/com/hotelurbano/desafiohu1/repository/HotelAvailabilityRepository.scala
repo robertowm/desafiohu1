@@ -2,7 +2,6 @@ package com.hotelurbano.desafiohu1.repository
 
 import com.google.inject.Inject
 import com.hotelurbano.desafiohu1.repository.index.HotelAvailabilityIndex
-import org.apache.lucene.document.DateTools
 import org.apache.lucene.index.Term
 import org.apache.lucene.search.BooleanClause.Occur
 import org.apache.lucene.search._
@@ -12,9 +11,7 @@ import org.joda.time.DateTime
 class HotelAvailabilityRepository @Inject()(index: HotelAvailabilityIndex){
 
   private def createRangeQuery(fieldName: String, begin: DateTime, end: DateTime) : Query =
-    createRangeQuery(fieldName,
-      DateTools.dateToString(begin.toDate, DateTools.Resolution.DAY),
-      DateTools.dateToString(end.toDate, DateTools.Resolution.DAY))
+    createRangeQuery(fieldName, begin.toString, end.toString)
 
   private def createRangeQuery(fieldName: String, begin: String, end: String) : Query =
     new TermRangeQuery(fieldName, new BytesRef(end), new BytesRef(end), true, true)

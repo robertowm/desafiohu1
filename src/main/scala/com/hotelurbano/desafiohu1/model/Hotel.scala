@@ -9,7 +9,6 @@ case class Hotel(id: String, city: String, name: String) extends Searchable {
   def toDocument: Document = {
     val document = new Document
 
-    // document.add(new IntField("id", id, Field.Store.YES))
     document.add(new StringField("id", id, Field.Store.YES))
     document.add(new TextField("city", city, Field.Store.YES))
     document.add(new TextField("name", name, Field.Store.YES))
