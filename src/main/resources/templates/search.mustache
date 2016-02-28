@@ -57,11 +57,8 @@
 
     $('.typeahead').typeahead({
         source: function (query, callback) {
-            var result = [];
-            for (var i = 1; i <= 4; i++) {
-                result.push(query + i);
-            }
-            callback(result);
+            var url = "http://localhost:9999/widget/autocomplete?query=" + encodeURIComponent(query);
+            $.get(url, callback);
         }
     });
 </script>
