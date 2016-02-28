@@ -6,8 +6,6 @@ import org.apache.lucene.index.IndexWriter
 
 import scala.io.Source
 
-object HotelIndexInstance extends HotelIndex
-
 class HotelIndex extends LuceneIndex[Hotel] {
 
   def loadData(writer: IndexWriter) = {

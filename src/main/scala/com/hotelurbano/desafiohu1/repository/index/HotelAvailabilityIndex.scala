@@ -1,6 +1,7 @@
 package com.hotelurbano.desafiohu1.repository.index
 
-import com.hotelurbano.desafiohu1.model.{HotelAvailability, Hotel}
+import com.google.inject.Inject
+import com.hotelurbano.desafiohu1.model.HotelAvailability
 import org.apache.lucene.document.Document
 import org.apache.lucene.index.IndexWriter
 import org.joda.time.DateTime
@@ -8,12 +9,9 @@ import org.joda.time.format.DateTimeFormat
 
 import scala.io.Source
 
-object HotelAvailabilityIndexInstance extends HotelAvailabilityIndex
+class HotelAvailabilityIndex @Inject()(hotelIndex: HotelIndex) extends LuceneIndex[HotelAvailability] {
 
-class HotelAvailabilityIndex extends LuceneIndex[HotelAvailability] {
-
-  def loadData(writer: IndexWriter) = {
-    val hotelIndex = HotelIndexInstance
+  def loadData(writer: IndexWriter) =
     Source
       .fromFile("artefatos/disp.txt")
       .getLines
@@ -26,7 +24,6 @@ class HotelAvailabilityIndex extends LuceneIndex[HotelAvailability] {
         }
         writer.addDocument(entry.toDocument)
       }
-  }
 
   protected def convertDocument(document: Document) =
     new HotelAvailability(document)

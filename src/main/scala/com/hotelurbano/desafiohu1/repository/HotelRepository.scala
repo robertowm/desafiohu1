@@ -1,12 +1,9 @@
 package com.hotelurbano.desafiohu1.repository
 
-import com.hotelurbano.desafiohu1.repository.index.HotelIndexInstance
+import com.google.inject.Inject
+import com.hotelurbano.desafiohu1.repository.index.HotelIndex
 
-object HotelRepositoryInstance extends HotelRepository
-
-class HotelRepository {
-
-  val index = HotelIndexInstance
+class HotelRepository @Inject()(index: HotelIndex) {
 
   def searchByCity(city: String) =
     index.search(city, "city")

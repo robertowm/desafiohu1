@@ -1,14 +1,10 @@
 package com.hotelurbano.desafiohu1.repository.index
 
 import com.hotelurbano.desafiohu1.model.Searchable
-import com.ibm.icu.text.Collator
-import com.ibm.icu.util.ULocale
 import org.apache.lucene.analysis.br.BrazilianAnalyzer
-import org.apache.lucene.analysis.standard.StandardAnalyzer
 import org.apache.lucene.analysis.util.CharArraySet
-import org.apache.lucene.collation.ICUCollationKeyAnalyzer
 import org.apache.lucene.document.Document
-import org.apache.lucene.index.{Term, DirectoryReader, IndexWriter, IndexWriterConfig}
+import org.apache.lucene.index.{DirectoryReader, IndexWriter, IndexWriterConfig, Term}
 import org.apache.lucene.queryparser.classic.{MultiFieldQueryParser, QueryParser}
 import org.apache.lucene.search._
 import org.apache.lucene.store.RAMDirectory
@@ -16,10 +12,9 @@ import org.apache.lucene.store.RAMDirectory
 abstract class LuceneIndex[MODEL <: Searchable] {
 
   protected def loadData(writer: IndexWriter)
+
   protected def convertDocument(document: Document): MODEL
 
-//  private val analyzer: ICUCollationKeyAnalyzer =
-//    new ICUCollationKeyAnalyzer(Collator.getInstance(new ULocale("pt_BR")))
   private val analyzer = new BrazilianAnalyzer(new CharArraySet(0, true))
 
   private val directory: RAMDirectory = new RAMDirectory
