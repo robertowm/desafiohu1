@@ -15,5 +15,26 @@ class AppFeatureTest extends FeatureTest {
         andExpect = Ok,
         withBody = "pong")
     }
+
+    "get widget" in {
+      server.httpGet(
+        path = "/widget",
+        andExpect = Ok
+      )
+    }
+
+    "autocomplete" in {
+      server.httpGet(
+        path = "/widget/autocomplete?query=penedo",
+        andExpect = Ok,
+        withBody = "[\"Penedo\",\"Capitao Nareia Pousada - Penedo\",\"Hotel Bellevue - Penedo\",\"City Seasons Al Ain - Penedo\",\"Marquesado De Almansa - Penedo\",\"Apartamentos Aguazul - Penedo\",\"Akdas Kusadasi - Penedo\",\"Grand Kurdoglu Hotel - Penedo\",\"Maritim Hotel Club Alantur - Penedo\",\"Titan Select Hotel - Penedo\"]"
+      )
+
+      server.httpGet(
+        path = "/widget/autocomplete?query=abobrinha",
+        andExpect = Ok,
+        withBody = "[]"
+      )
+    }
   }
 }
