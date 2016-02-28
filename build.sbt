@@ -49,5 +49,6 @@ libraryDependencies ++= Seq(
 
   "org.apache.lucene" % "lucene-core" % versions.lucene,
   "org.apache.lucene" % "lucene-analyzers-common" % versions.lucene,
+  "org.apache.lucene" % "lucene-analyzers-icu" % versions.lucene,
   "org.apache.lucene" % "lucene-queryparser" % versions.lucene
 )

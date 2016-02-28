@@ -4,12 +4,14 @@ import com.twitter.finatra.conversions.time.RichStringTime
 import org.apache.lucene.document._
 import org.joda.time.DateTime
 
-case class HotelAvailability(hotelId: Int, city: String, name: String, date: DateTime, total: Int) {
+case class HotelAvailability(hotelId: Int, city: String, name: String, date: DateTime, total: Int)
+    extends Searchable {
+
   def this(document: Document) =
     this(document.get("hotelId").toInt, document.get("city"), document.get("name"),
       document.get("date").toDateTime, document.get("total").toInt)
 
-  def asDocument = {
+  def toDocument: Document = {
     val document = new Document
     val parsedDate = DateTools.dateToString(date.toDate, DateTools.Resolution.DAY)
 
