@@ -41,7 +41,7 @@ class WidgetController extends Controller {
 
     val where = request.getParam("where")
     val begin = new DateTime(request.getParam("begin"),  DateTimeFormat.forPattern("dd/MM/yyyy"))
-    val end = new DateTime(request.getParam("end",  DateTimeFormat.forPattern("dd/MM/yyyy")))
+    val end =   new DateTime(request.getParam("end"),  DateTimeFormat.forPattern("dd/MM/yyyy"))
 
     if (request.containsParam("city")) {
       hotelAvailabilityRepository.searchByRangeAndCity(begin, end, request.getParam("city"))
