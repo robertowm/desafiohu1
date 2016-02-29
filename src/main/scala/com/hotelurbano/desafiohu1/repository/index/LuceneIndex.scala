@@ -31,34 +31,34 @@ abstract class LuceneIndex[MODEL <: Searchable] {
   private val indexSearcher: IndexSearcher =
     new IndexSearcher(DirectoryReader.open(directory))
 
-  def search(query: Query): List[MODEL] =
-    indexSearcher.search(query, 20).scoreDocs
+  def search(query: Query, size: Int): List[MODEL] =
+    indexSearcher.search(query, size).scoreDocs
       .map(sc => indexSearcher.doc(sc.doc))
       .map(doc => convertDocument(doc))
       .toList
 
-  def search(query: String, defaultFields: Array[String]): List[MODEL] =
-    this.search(createMultiFieldQuery(defaultFields, query))
+  def search(fields: Array[String], query: String, size: Int): List[MODEL] =
+    this.search(createMultiFieldQuery(fields, query), size)
 
 
-  def search(query: String, defaultField: String): List[MODEL] =
-    this.search(query, Array(defaultField))
+  def search(field: String, query: String, size: Int): List[MODEL] =
+    this.search(createFieldQuery(field, query), size)
 
   def getById(id: String): Option[MODEL] =
-    this.search(new TermQuery(new Term("id", id)))
+    this.search(new TermQuery(new Term("id", id)), 1)
     match {
-      case head :: tail => Some(head)
+      case List(head: MODEL) => Some(head)
       case _ => None
     }
 
-  def createRangeQuery(fieldName: String, begin: DateTime, end: DateTime) : Query =
-    createRangeQuery(fieldName, begin.toString, end.toString)
+  def createRangeQuery(field: String, begin: DateTime, end: DateTime) : Query =
+    createRangeQuery(field, begin.toString, end.toString)
 
-  def createRangeQuery(fieldName: String, begin: String, end: String) : Query =
-    new TermRangeQuery(fieldName, new BytesRef(begin), new BytesRef(end), true, true)
+  def createRangeQuery(field: String, begin: String, end: String) : Query =
+    new TermRangeQuery(field, new BytesRef(begin), new BytesRef(end), true, true)
 
-  def createNumericRangeQuery(fieldName: String, begin: Int, end: Int = Int.MaxValue) : Query =
-    NumericRangeQuery.newIntRange(fieldName, begin, end, true, true)
+  def createNumericRangeQuery(field: String, begin: Int, end: Int = Int.MaxValue) : Query =
+    NumericRangeQuery.newIntRange(field, begin, end, true, true)
 
   def createMultiFieldQuery(fields: Array[String], value: String) : Query = {
     val parser = new MultiFieldQueryParser(fields, analyzer)
@@ -73,11 +73,10 @@ abstract class LuceneIndex[MODEL <: Searchable] {
 
   def createFieldQuery(field: String, value: String) : Query = {
     val parser = new QueryParser(field, analyzer)
-    parser.setDefaultOperator(QueryParser.Operator.OR)
+    parser.setDefaultOperator(QueryParser.Operator.AND)
     parser.setAllowLeadingWildcard(true);
     parser.setEnablePositionIncrements(true);
     parser.setLowercaseExpandedTerms(true);
-    parser.setPhraseSlop(5);
 
     parser.parse(value)
   }

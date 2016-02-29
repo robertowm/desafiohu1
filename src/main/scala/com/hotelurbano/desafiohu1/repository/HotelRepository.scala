@@ -6,9 +6,9 @@ import com.hotelurbano.desafiohu1.repository.index.HotelIndex
 class HotelRepository @Inject()(index: HotelIndex) {
 
   def searchByCity(city: String) =
-    index.search(city, "city")
+    index.search("city", city, 5)
 
   def searchByCityOrName(name: String) =
-    index.search(name, Array("city", "name"))
+    index.search(Array("city", "name"), name, 5)
 
 }
