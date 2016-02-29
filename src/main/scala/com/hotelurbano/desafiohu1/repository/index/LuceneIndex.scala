@@ -55,20 +55,10 @@ abstract class LuceneIndex[MODEL <: Searchable] {
     createRangeQuery(fieldName, begin.toString, end.toString)
 
   def createRangeQuery(fieldName: String, begin: String, end: String) : Query =
-    new TermRangeQuery(fieldName, new BytesRef(end), new BytesRef(end), true, true)
+    new TermRangeQuery(fieldName, new BytesRef(begin), new BytesRef(end), true, true)
 
   def createNumericRangeQuery(fieldName: String, begin: Int, end: Int = Int.MaxValue) : Query =
     NumericRangeQuery.newIntRange(fieldName, begin, end, true, true)
-
-//  def createPhraseQuery(fieldName: String, values: Array[String]) : Query = {
-//    val builder = new PhraseQuery.Builder()
-//    values.map{ new Term(fieldName,_) }
-//      .foreach { builder.add(_) }
-//    builder.build()
-//  }
-
-//  def createTermQuery(fieldName: String, value: String) : Query =
-//    new TermQuery(new Term(fieldName, value))
 
   def createMultiFieldQuery(fields: Array[String], value: String) : Query = {
     val parser = new MultiFieldQueryParser(fields, analyzer)
