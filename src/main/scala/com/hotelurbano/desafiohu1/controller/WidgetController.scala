@@ -36,9 +36,9 @@ class WidgetController @Inject()(
 
     val result = where.split(" - ") match {
       case Array(city) =>
-        hotelAvailabilityRepository.searchByRangeAndCity(begin, end, city)
+        hotelAvailabilityRepository.searchAvailableByRangeAndCity(begin, end, city)
       case Array(name , city) =>
-        hotelAvailabilityRepository.searchByRangeAndNameAndCity(begin, end, name, city)
+        hotelAvailabilityRepository.searchAvailableByRangeAndNameAndCity(begin, end, name, city)
     }
 
     if (responseType.equals("view")) {
