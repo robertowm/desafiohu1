@@ -1,0 +1,14 @@
+{{<layout.mustache}}
+{{$body}}
+<div class="container">
+    <ul class="list-group">
+        {{#result}}
+            <li class="list-group-item">
+                <span class="badge">{{availableRooms}}</span>
+                {{name}}, {{city}}
+            </li>
+        {{/result}}
+    </ul>
+</div>
+{{/body}}
+{{/layout.mustache}}

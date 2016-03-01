@@ -1,7 +1,7 @@
 package com.hotelurbano.desafiohu1.repository
 
 import com.google.inject.Inject
-import com.hotelurbano.desafiohu1.model.HotelAvailability
+import com.hotelurbano.desafiohu1.model.{AvailablePackage, HotelAvailability}
 import com.hotelurbano.desafiohu1.repository.index.HotelAvailabilityIndex
 import org.apache.lucene.search.BooleanClause.Occur
 import org.apache.lucene.search._
@@ -9,9 +9,8 @@ import org.joda.time.{Days, DateTime}
 
 class HotelAvailabilityRepository @Inject()(index: HotelAvailabilityIndex) {
 
-  case class SearchResultElement(hotelId: String, name: String, city: String, begin: DateTime, end: DateTime)
-
-  private def filterAvailableInRange(list: List[HotelAvailability], begin: DateTime, end: DateTime) = {
+  private def filterAvailableInRange(list: List[HotelAvailability],
+                                     begin: DateTime, end: DateTime): List[AvailablePackage] = {
     val days = Days.daysBetween(begin.toLocalDate, end.toLocalDate).getDays
     list.groupBy(_.hotelId)
       .filter { _ match {
@@ -21,8 +20,10 @@ class HotelAvailabilityRepository @Inject()(index: HotelAvailabilityIndex) {
       .map( _ match {
         case (hotelId, elements) =>
           val first = elements.head
-          new SearchResultElement(hotelId, first.name, first.city, begin, end)
+          val roomsAvailable = elements.map(_.total).min
+          new AvailablePackage(hotelId, first.name, first.city, begin, end, roomsAvailable)
       })
+      .toList
   }
 
   def searchAvailableByRangeAndNameAndCity(begin: DateTime, end: DateTime, name: String, city: String) = {

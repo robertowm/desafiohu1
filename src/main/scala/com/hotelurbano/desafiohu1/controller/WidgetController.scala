@@ -1,6 +1,7 @@
 package com.hotelurbano.desafiohu1.controller
 
 import com.google.inject.Inject
+import com.hotelurbano.desafiohu1.model.AvailablePackage
 import com.hotelurbano.desafiohu1.repository.{HotelAvailabilityRepository, HotelRepository}
 import com.twitter.finagle.http.Request
 import com.twitter.finatra.http.Controller
@@ -13,7 +14,7 @@ class WidgetController @Inject()(
                                 ) extends Controller {
 
   get("/widget") { request: Request =>
-    response.ok.view("search.mustache", null)
+    response.ok.view("widget.mustache", null)
   }
 
   get("/widget/autocomplete") { request: Request =>
@@ -27,6 +28,8 @@ class WidgetController @Inject()(
 
     cities ++ hotels
   }
+
+  case class SearchResult(result: List[AvailablePackage])
 
   post("/search") { request: Request =>
     val where = request.getParam("where")
@@ -42,7 +45,7 @@ class WidgetController @Inject()(
     }
 
     if (responseType.equals("view")) {
-      response.ok.view("result.mustache", result)
+      response.ok.view("search-result.mustache", new SearchResult(result))
     } else {
       result
     }
