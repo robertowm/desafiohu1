@@ -13,7 +13,7 @@ class HotelAvailabilityIndex @Inject()(hotelIndex: HotelIndex) extends LuceneInd
 
   def loadData(writer: IndexWriter) =
     Source
-      .fromFile("artefatos/disp.txt")
+      .fromInputStream(getClass.getResourceAsStream("/artefatos/disp.txt"))
       .getLines
       .foreach { line =>
         val entry = line.split(',') match {

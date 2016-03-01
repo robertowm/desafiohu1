@@ -10,7 +10,7 @@ class HotelIndex extends LuceneIndex[Hotel] {
 
   def loadData(writer: IndexWriter) = {
     Source
-      .fromFile("artefatos/hoteis.txt")
+      .fromInputStream(getClass.getResourceAsStream("/artefatos/hoteis.txt"))
       .getLines
       .map { line =>
         line.split(',') match {
