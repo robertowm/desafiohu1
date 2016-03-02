@@ -8,6 +8,9 @@
                 {{name}}, {{city}}
             </li>
         {{/result}}
+        {{^repo}}
+            Não foi encontrado qualquer pacote relacionado.  Tente outro intervalo.
+        {{/repo}}
     </ul>
 </div>
 {{/body}}

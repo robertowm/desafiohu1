@@ -1,61 +1,66 @@
 {{<layout.mustache}}
 {{$body}}
-<div class="container widget">
-    <div>HOTÉIS</div>
-    <div>+ 170.000 hotéis, pousadas e resorts no mundo todo.</div>
-    <form action="search" method="post">
-        <input type="hidden" name="responseType" value="view"/>
-
+<main class="widget">
+    <div class="title">
+        <h1 class="text-center"><span class="glyphicon glyphicon-bed logo"></span>HOTÉIS</h1>
+    </div>
+    <div class="container-fluid">
         <div class="row">
-            <div class="col-lg-4">
-                <label for="whereInput">Quer ficar onde?</label>
-            </div>
-            <div class="col-lg-8">
-                <label for="beginInput">Quando? (Entrada e Saída)</label>
-            </div>
+            <p class="col-sm-12 text-center">+170.000 hotéis, pousadas e resorts no mundo todo.</p>
         </div>
-
-        <div class="row">
-            <div class="col-lg-4">
-                <input type="text" id="whereInput" placeholder="cidade ou hotel" name="where"
-                       class="typeahead" autocomplete="off">
-            </div>
-            <div class="col-lg-4 ">
-                <div class="input-daterange">
-                    <input type="text" id="beginInput" placeholder="entrada" name="begin"/>
+        <form action="search" method="post">
+            <input type="hidden" name="responseType" value="view" />
+            <div class="row">
+                <div class="col-lg-4">
+                    <label for="whereInput" class="form-title">Quer ficar onde?</label>
+                </div>
+                <div class="col-lg-8">
+                    <label for="startInput" class="form-title">Quando? (Entrada e Saída)</label>
                 </div>
             </div>
-            <div class="col-lg-4 ">
-                <div class="input-daterange">
-                    <input type="text" id="endInput" placeholder="saída" name="end" />
+
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="input-group">
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-map-marker"></span></span>
+                        <input type="text" id="whereInput" class="form-control typeahead"
+                               placeholder="cidade ou hotel" name="where">
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="input-group date" data-provide="datepicker" data-date-format="dd/mm/yyyy"
+                         data-date-max-view-mode="0" data-date-language="pt-BR" data-date-autoclose="true"
+                         data-date-today-highlight="true">
+                        <div class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </div>
+                        <input type="text" class="form-control" id="startInput" placeholder="entrada" name="begin"/>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="input-group date" data-provide="datepicker" data-date-format="dd/mm/yyyy"
+                         data-date-max-view-mode="0" data-date-language="pt-BR" data-date-autoclose="true"
+                         data-date-today-highlight="true">
+                        <div class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </div>
+                        <input type="text" class="form-control" id="endInput" placeholder="saída" name="end">
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-4">
-                <label for="noDateCheckbox">
-                    <input type="checkbox" id="noDateCheckbox" name="undef"> Ainda não defini as datas
-                </label>
+            <div class="row">
+                <div class="col-lg-2 col-lg-offset-5">
+                    <button type="submit" class="btn-search btn btn-lg">
+                        <span class="glyphicon glyphicon-search"></span> Buscar</button>
+                </div>
             </div>
-        </div>
-
-        <div class="center-block">
-            <input type="submit" class="btn-primary" value="Buscar">
-        </div>
-    </form>
-</div>
+        </form>
+    </div>
+</main>
 {{/body}}
 {{$custom-scripts}}
 <script>
-    $('.widget .input-daterange').datepicker({
-        format: "dd/mm/yyyy",
-        maxViewMode: 0,
-        language: "pt-BR",
-        autoclose: true,
-        todayHighlight: true
-    });
-
     $('.typeahead').typeahead({
         source: function (query, callback) {
             var url = "http://localhost:9999/widget/autocomplete?query=" + encodeURIComponent(query);
@@ -64,4 +69,64 @@
     });
 </script>
 {{/custom-scripts}}
+{{$custom-style}}
+.widget {
+    width: 700px;
+    height: 310px;
+    border: solid 2px gainsboro;
+    border-radius: 8px;
+    display: block;
+    padding: 0;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 20px;
+}
+
+.logo {
+    font-size: 0.7em;
+    padding: 10px;
+    border: solid 3px #ffffff;
+    border-radius: 100px;
+    margin-right: 10px;
+}
+
+.title {
+    background-color: #00BFFF;
+    color: #ffffff;
+    padding: 10px;
+    border: solid 1px transparent;
+    border-radius: 6px 6px 0 0;
+}
+
+main {
+    margin-top: 10px;
+    padding: 20px;
+}
+
+p {
+    font-size: 1.6em;
+    color: #00BFFF;
+    padding-bottom: 20px;
+}
+
+.form-title {
+    font-size: 1.3em;
+}
+
+.glyphicon-map-marker, .glyphicon-calendar{
+    font-size: 1.3em;
+    color: #FFA500;
+}
+
+.form-checkbox{
+    margin-top: 5px;
+    font-size: 1em;
+}
+
+.btn-search{
+    margin-top: 20px;
+    color: #ffffff;
+    background-color: #FFA500;
+}
+{{/custom-style}}
 {{/layout.mustache}}
