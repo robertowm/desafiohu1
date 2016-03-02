@@ -9,13 +9,6 @@ class AppFeatureTest extends FeatureTest {
   override val server = new EmbeddedHttpServer(new AppServer)
 
   "Server" should {
-    "ping" in {
-      server.httpGet(
-        path = "/ping",
-        andExpect = Ok,
-        withBody = "pong")
-    }
-
     "get widget" in {
       server.httpGet(
         path = "/widget",
