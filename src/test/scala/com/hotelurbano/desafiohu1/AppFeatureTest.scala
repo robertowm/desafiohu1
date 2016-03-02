@@ -77,5 +77,15 @@ class AppFeatureTest extends FeatureTest {
         withBody = "[{\"hotel_id\":\"1\",\"name\":\"Mercatto Casa Hotel\",\"city\":\"Araruama\",\"begin\":\"2015-05-06T00:00:00.000Z\",\"end\":\"2015-05-08T00:00:00.000Z\",\"available_rooms\":1}]"
       )
     }
+
+    "search for 'Araruama' in range without vacancy" in {
+      server.httpPost(
+        path = "/search",
+        postBody = "where=Araruama&begin=06%2F05%2F2019&end=08%2F05%2F2019",
+        contentType = "application/x-www-form-urlencoded",
+        andExpect = Ok,
+        withBody = "[]"
+      )
+    }
   }
 }
