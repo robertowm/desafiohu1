@@ -55,7 +55,7 @@ class AppFeatureTest extends FeatureTest {
         postBody = "where=Penedo&begin=06%2F05%2F2015&end=08%2F05%2F2015",
         contentType = "application/x-www-form-urlencoded",
         andExpect = Ok,
-        withBody = "[{\"hotel_id\":\"418\",\"name\":\"Grand Kurdoglu Hotel\",\"city\":\"Penedo\",\"begin\":\"2015-05-06T03:00:00.000Z\",\"end\":\"2015-05-08T03:00:00.000Z\",\"available_rooms\":1},{\"hotel_id\":\"10\",\"name\":\"Capitao Nareia Pousada\",\"city\":\"Penedo\",\"begin\":\"2015-05-06T03:00:00.000Z\",\"end\":\"2015-05-08T03:00:00.000Z\",\"available_rooms\":1},{\"hotel_id\":\"348\",\"name\":\"Apartamentos Aguazul\",\"city\":\"Penedo\",\"begin\":\"2015-05-06T03:00:00.000Z\",\"end\":\"2015-05-08T03:00:00.000Z\",\"available_rooms\":1},{\"hotel_id\":\"25\",\"name\":\"City Seasons Al Ain\",\"city\":\"Penedo\",\"begin\":\"2015-05-06T03:00:00.000Z\",\"end\":\"2015-05-08T03:00:00.000Z\",\"available_rooms\":1},{\"hotel_id\":\"464\",\"name\":\"Maritim Hotel Club Alantur\",\"city\":\"Penedo\",\"begin\":\"2015-05-06T03:00:00.000Z\",\"end\":\"2015-05-08T03:00:00.000Z\",\"available_rooms\":1}]"
+        withBody = "[{\"hotel_id\":\"418\",\"name\":\"Grand Kurdoglu Hotel\",\"city\":\"Penedo\",\"begin\":\"2015-05-06T00:00:00.000Z\",\"end\":\"2015-05-08T00:00:00.000Z\",\"available_rooms\":1},{\"hotel_id\":\"10\",\"name\":\"Capitao Nareia Pousada\",\"city\":\"Penedo\",\"begin\":\"2015-05-06T00:00:00.000Z\",\"end\":\"2015-05-08T00:00:00.000Z\",\"available_rooms\":1},{\"hotel_id\":\"348\",\"name\":\"Apartamentos Aguazul\",\"city\":\"Penedo\",\"begin\":\"2015-05-06T00:00:00.000Z\",\"end\":\"2015-05-08T00:00:00.000Z\",\"available_rooms\":1},{\"hotel_id\":\"25\",\"name\":\"City Seasons Al Ain\",\"city\":\"Penedo\",\"begin\":\"2015-05-06T00:00:00.000Z\",\"end\":\"2015-05-08T00:00:00.000Z\",\"available_rooms\":1},{\"hotel_id\":\"464\",\"name\":\"Maritim Hotel Club Alantur\",\"city\":\"Penedo\",\"begin\":\"2015-05-06T00:00:00.000Z\",\"end\":\"2015-05-08T00:00:00.000Z\",\"available_rooms\":1}]"
       )
     }
 
@@ -74,7 +74,7 @@ class AppFeatureTest extends FeatureTest {
         postBody = "where=Mercatto+Casa+Hotel+-+Araruama&begin=06%2F05%2F2015&end=08%2F05%2F2015",
         contentType = "application/x-www-form-urlencoded",
         andExpect = Ok,
-        withBody = "[{\"hotel_id\":\"1\",\"name\":\"Mercatto Casa Hotel\",\"city\":\"Araruama\",\"begin\":\"2015-05-06T03:00:00.000Z\",\"end\":\"2015-05-08T03:00:00.000Z\",\"available_rooms\":1}]"
+        withBody = "[{\"hotel_id\":\"1\",\"name\":\"Mercatto Casa Hotel\",\"city\":\"Araruama\",\"begin\":\"2015-05-06T00:00:00.000Z\",\"end\":\"2015-05-08T00:00:00.000Z\",\"available_rooms\":1}]"
       )
     }
   }
